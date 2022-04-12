@@ -6,7 +6,8 @@
 #include "AxisIndicator.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+{
 	WinApp* win = nullptr;
 	DirectXCommon* dxCommon = nullptr;
 	// 汎用機能
