@@ -61,7 +61,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	while (true)
 	{
 		// メッセージ処理
-		if (win->ProcessMessage()) {
+		if (win->ProcessMessage())
+		{
 			break;
 		}
 
