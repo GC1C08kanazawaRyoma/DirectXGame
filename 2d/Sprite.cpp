@@ -20,8 +20,10 @@ std::array<ComPtr<ID3D12PipelineState>, size_t(Sprite::BlendMode::kCountOfBlendM
   Sprite::sPipelineStates_;
 XMMATRIX Sprite::sMatProjection_;
 
-void Sprite::StaticInitialize(
-  ID3D12Device* device, int window_width, int window_height, const std::wstring& directoryPath) {
+void Sprite::StaticInitialize
+(
+  ID3D12Device* device, int window_width, int window_height, const std::wstring& directoryPath)
+{
 	// nullptrチェック
 	assert(device);
 
@@ -220,7 +222,8 @@ void Sprite::StaticInitialize(
 	  0.0f, (float)window_width, (float)window_height, 0.0f, 0.0f, 1.0f);
 }
 
-void Sprite::PreDraw(ID3D12GraphicsCommandList* commandList, BlendMode blendMode) {
+void Sprite::PreDraw(ID3D12GraphicsCommandList* commandList, BlendMode blendMode)
+{
 	// PreDrawとPostDrawがペアで呼ばれていなければエラー
 	assert(Sprite::sCommandList_ == nullptr);
 
@@ -238,14 +241,16 @@ void Sprite::PreDraw(ID3D12GraphicsCommandList* commandList, BlendMode blendMode
 	sCommandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 }
 
-void Sprite::PostDraw() {
+void Sprite::PostDraw()
+{
 	// コマンドリストを解除
 	Sprite::sCommandList_ = nullptr;
 }
 
 Sprite* Sprite::Create(
   uint32_t textureHandle, XMFLOAT2 position, XMFLOAT4 color, XMFLOAT2 anchorpoint, bool isFlipX,
-  bool isFlipY) {
+  bool isFlipY)
+{
 	// 仮サイズ
 	XMFLOAT2 size = {100.0f, 100.0f};
 
