@@ -3,6 +3,7 @@
 #include <cassert>
 
 using namespace DirectX;
+using namespace std;
 
 GameScene::GameScene() {}
 
@@ -18,13 +19,24 @@ void GameScene::Initialize()
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 	debugText_ = DebugText::GetInstance();
+	// ファイル名を指定してテクスチャを読み込む
 	textureHandle_ = TextureManager::Load("mario.jpg");
+	// スプライトの生成
 	sprite_ = Sprite::Create(textureHandle_, {100, 50});
+	// 3Dモデルの生成
 	model_ = Model::Create();
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
+	// サウンドデータの読み込み
+	soundDataHandle_ = audio_->LoadWave("se_sad03.wav");
+	// 音声再生
+	audio_->PlayWave(soundDataHandle_);
+	// 音量調整（音を再生した後に記述）
+	audio_->SetVolume(soundDataHandle_, 0.1f);
+	// 音声再生
+	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 }
 
 void GameScene::Update() 
@@ -36,6 +48,22 @@ void GameScene::Update()
 	position.y += 1.0f;
 	// 移動した座標をスプライトに反映
 	sprite_->SetPosition(position);
+	// スペースキーを押した瞬間
+	if (input_->TriggerKey(DIK_SPACE))
+	{
+		audio_->StopWave(voiceHandle_);
+	}
+	// デバッグテキストの表示
+	debugText_->Print("Kaizokuou ni oreha naru.", 50, 50, 1.0f);
+	// 書式指定付き表示
+	debugText_->SetPos(50, 70);
+	debugText_->Printf("year:%d", 2001);
+	// 変数の値をインクリメント
+	value_++;
+	// 値を含んだ文字列
+	string strDebug = string("Value:") + to_string(value_);
+	// デバッグテキストの表示
+	debugText_->Print(strDebug, 50, 50, 1.0f);
 }
 
 void GameScene::Draw()
