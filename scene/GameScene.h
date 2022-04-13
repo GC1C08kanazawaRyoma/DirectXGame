@@ -14,8 +14,8 @@
 /// <summary>
 /// ゲームシーン
 /// </summary>
-class GameScene {
-
+class GameScene
+{
   public: // メンバ関数
 	/// <summary>
 	/// コンストクラタ
@@ -52,7 +52,7 @@ class GameScene {
 	// 3Dモデル
 	Model* model_ = nullptr;
 	// ワールドトランスフォーム
-	WorldTransform worldTransform_;
+	WorldTransform worldTransform_[100];
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
 
