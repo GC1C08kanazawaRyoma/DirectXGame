@@ -4,6 +4,7 @@
 #include <random>
 
 using namespace DirectX;
+using namespace std;
 
 GameScene::GameScene() {}
 
@@ -17,13 +18,13 @@ void GameScene::Initialize()
 	debugText_ = DebugText::GetInstance();
 
 	// 乱数シード生成器
-	std::random_device seed_gen;
+	random_device seed_gen;
 	// メルセンヌ・ツイスター
-	std::mt19937_64 engine(seed_gen);
+	mt19937_64 engine(seed_gen);
 	// 乱数範囲（回転角用）
-	std::uniform_real_distribution<float> rotDist(0.0f, XM_2PI);
+	uniform_real_distribution<float> rotDist(0.0f, XM_2PI);
 	// 乱数範囲（座標用）
-	std::uniform_real_distribution<float> posDist(-10.0f, 10.0f);
+	uniform_real_distribution<float> posDist(-10.0f, 10.0f);
 
 	// ファイル名を指定してテクスチャを読み込む
 	textureHandle_ = TextureManager::Load("mario.jpg");
@@ -31,8 +32,8 @@ void GameScene::Initialize()
 	// 3Dモデルの生成
 	model_ = Model::Create();
 
-	for (size_t i = 0; i < _countof(worldTransform_); i++) {
-
+	for (size_t i = 0; i < _countof(worldTransform_); i++)
+	{
 		// x、y、z 方向のスケーリングを設定
 		worldTransform_[i].scale_ = {1.0f, 1.0f, 1.0f};
 
@@ -80,7 +81,8 @@ void GameScene::Draw()
 	/// </summary>
 	
 	/// // 3Dモデルの描画
-	for (size_t i = 0; i < _countof(worldTransform_); i++) {
+	for (size_t i = 0; i < _countof(worldTransform_); i++)
+	{
 		model_->Draw(worldTransform_[i], viewProjection_, textureHandle_);
 	}
 
