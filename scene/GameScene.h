@@ -56,6 +56,9 @@ class GameScene
 	// ビュープロジェクション
 	ViewProjection viewProjection_;
 
+	// カメラ上方向の角度
+	float viewAngle = 0.0f;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
