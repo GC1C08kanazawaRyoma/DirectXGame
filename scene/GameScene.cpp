@@ -32,11 +32,9 @@ void GameScene::Initialize()
 	// サウンドデータの読み込み
 	soundDataHandle_ = audio_->LoadWave("se_sad03.wav");
 	// 音声再生
-	audio_->PlayWave(soundDataHandle_);
+	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 	// 音量調整（音を再生した後に記述）
 	audio_->SetVolume(soundDataHandle_, 0.1f);
-	// 音声再生
-	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 }
 
 void GameScene::Update() 
@@ -63,7 +61,7 @@ void GameScene::Update()
 	// 値を含んだ文字列
 	string strDebug = string("Value:") + to_string(value_);
 	// デバッグテキストの表示
-	debugText_->Print(strDebug, 50, 50, 1.0f);
+	debugText_->Print(strDebug, 50, 90, 1.0f);
 }
 
 void GameScene::Draw()
