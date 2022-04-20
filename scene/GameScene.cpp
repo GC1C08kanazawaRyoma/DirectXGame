@@ -34,7 +34,7 @@ void GameScene::Initialize()
 	// 音声再生
 	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 	// 音量調整（音を再生した後に記述）
-	audio_->SetVolume(soundDataHandle_, 0.1f);
+	audio_->SetVolume(soundDataHandle_, 0.05f);
 }
 
 void GameScene::Update() 
