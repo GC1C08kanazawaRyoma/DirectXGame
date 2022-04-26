@@ -21,52 +21,38 @@ void GameScene::Initialize()
 	// 3Dモデルの生成
 	model_ = Model::Create();
 
-	// ワールドトランスフォーム初期化
-	worldTransform_.Initialize();
+	// よしだくん
+	int num = 0;
 
-	// ビュープロジェクション初期化
-	viewProjection_.Initialize();
+	for (int i = 0; i < 100; i++) {
+		// x、y、z 方向のスケーリングを設定
+		worldTransform_[i].scale_ = {5.0f, 5.0f, 5.0f};
+		if (i <= 50) {
+			// x、y、z 軸周りの平行移動を設定
+			worldTransform_[i].translation_ = {-40.0f + (i * 10), 20.0f, 10.0f};
+		} else if (i > 50) {
+			// x、y、z 軸周りの平行移動を設定
+			worldTransform_[i].translation_ = {-40.0f + (num * 10), -20.0f, 10.0f};
+			num++;
+		}
+		// ワールドトランスフォーム初期化
+		worldTransform_[i].Initialize();
 
-	// x、y、z 方向のスケーリングを設定
-	worldTransform_.scale_ = {5.0f, 5.0f, 5.0f};
-
-	//x、y、z 軸周りの回転角を設定
-	worldTransform_.rotation_ = {XMConvertToRadians(45.0f), XMConvertToRadians(45.0f), 0.0f};
-
-	// x、y、z 軸周りの平行移動を設定
-	worldTransform_.translation_ = {10.0f, 10.0f, 10.0f};
-	// ワールドトランスフォーム初期化
-	worldTransform_.Initialize();
+		// ビュープロジェクション初期化
+		viewProjection_.Initialize();
+	}
 }
 
 void GameScene::Update()
 {
 	debugText_->SetPos(50, 50);
-	debugText_->Printf
-	(
-		"translation:(%f,%f,%f)",
-		worldTransform_.translation_.x,
-		worldTransform_.translation_.y,
-		worldTransform_.translation_.z
-	);
-
-	debugText_->SetPos(50, 70);
-	debugText_->Printf
-	(
-	  "rotetion:(%f,%f,%f)",
-		worldTransform_.rotation_.x,
-		worldTransform_.rotation_.y,
-		worldTransform_.rotation_.z
-	);
-
-	debugText_->SetPos(50, 90);
-	debugText_->Printf
-	(
-	  "scale:(%f,%f,%f)",
-		worldTransform_.scale_.x,
-		worldTransform_.scale_.y,
-		worldTransform_.scale_.z
-	);
+	for (int i = 0; i < 100; i++) {
+		debugText_->Printf(
+		  "translation:(%f,%f,%f)",
+			worldTransform_[i].translation_.x,
+			worldTransform_[i].translation_.y,
+			worldTransform_[i].translation_.z);
+	}
 }
 
 void GameScene::Draw()
@@ -97,7 +83,9 @@ void GameScene::Draw()
 	/// </summary>
 	
 	/// // 3Dモデルの描画
-	model_->Draw(worldTransform_, viewProjection_, textureHandle_);
+	for (int i = 0; i < 100; i++) {
+		model_->Draw(worldTransform_[i], viewProjection_, textureHandle_);
+	}
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
