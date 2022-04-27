@@ -45,14 +45,14 @@ void GameScene::Initialize()
 
 void GameScene::Update()
 {
-	debugText_->SetPos(50, 50);
+	/*debugText_->SetPos(50, 50);
 	for (int i = 0; i < 100; i++) {
 		debugText_->Printf(
 		  "translation:(%f,%f,%f)",
 			worldTransform_[i].translation_.x,
 			worldTransform_[i].translation_.y,
 			worldTransform_[i].translation_.z);
-	}
+	}*/
 }
 
 void GameScene::Draw()
